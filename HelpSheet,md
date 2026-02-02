@@ -1,0 +1,99 @@
+# CAN Message Misread Investigation Cheat Sheet
+
+---
+
+## The Three Cs
+
+**Complaint:** Verify the complaint; define the problem.
+
+**Cause:** What is the thing that's wrong?
+
+**Correction:** How do you fix it?
+
+Use this framework to organize your investigation.
+
+---
+
+## Setup
+
+Open PAC Control Basic and load "Opto22 test bench V00". Verify CAN2B module in position 0, baud rate 250 kbps, and CAN bus active (BusMaster shows traffic).
+
+---
+
+## Data Storage
+
+Locate in Variables:
+- `sCPacketHeaderm1` (string)
+- `sCPacketDatam1` (string)
+- `sHexLog` (table, 1000 lines max)
+
+For larger logs, insert SD card into Opto brain to store full data.
+
+---
+
+## View Raw Data
+
+Run strategy. Right-click `sHexLog` table → Watch. View received CAN packets as hex.
+
+Format: Timestamp | CAN_ID | Data_Bytes
+
+---
+
+## Examine Code
+
+Find Block 26 in CAN_COMM chart: "Get Header & Data"
+
+Copy the code that receives header and data. This is what you'll analyze.
+
+---
+
+## Ask AI
+
+Provide AI with:
+- The exact code from Block 26
+- Description: "This code occasionally misreads CAN messages. What's wrong?"
+
+Let AI identify the problem.
+
+---
+
+## Understand the Problem
+
+Once AI explains the issue, document in your notes:
+- What is happening?
+- Why does it work 99% of the time?
+- What causes the 1% failure?
+
+---
+
+## Fix It
+
+Ask AI: "How do I fix this code in OptoScript?"
+
+Implement AI's solution in a new block: "Get_Header_And_Data_Fixed"
+
+---
+
+## Test
+
+Run both original and fixed blocks. Log results separately. Compare over extended runtime.
+
+Document: Original misread rate vs. Fixed misread rate.
+
+---
+
+## Questions to Ask AI
+
+- Is there a timing issue in this code?
+- What happens between the two ReceiveNChars calls?
+- Can the data change while being read?
+- How would a new CAN message arriving affect this?
+
+---
+
+## Reference
+
+**sHexLog Table:**
+```
+Index | Timestamp | CAN_ID | Byte0 | Byte1 | Byte2 | Byte3 | Byte4 | Byte5 | Byte6 | Byte7
+```
