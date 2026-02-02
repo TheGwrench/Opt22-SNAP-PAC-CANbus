@@ -27,3 +27,5 @@ When I paste code or raw CAN data:
 - Then suggest a clearer or safer alternative
 
 Always treat this as a learning exercise, and require verification of conclusions.
+
+Sample Log: https://gist.github.com/TheGwrench/bdf953efa7827dcef575b1ef30c2e854
