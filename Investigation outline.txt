@@ -1,0 +1,61 @@
+Proposed Plan: CAN Message Misread Investigation
+Platform: Opto22 SNAP PAC R2 + CAN module
+Intern Skill Level: No prior CANbus experience
+Final Deliverable: New Opto22 script block for test comparison (not production)
+________________________________________
+1. Objective
+Determine whether intermittent CAN misreads are caused by the current message unpacking method, and produce a corrected unpacking script suitable for testing.
+________________________________________
+2. Approach Overview
+The intern will:
+1.	Use an AI with a crafted prompt to assist the learning process. 
+2.	Learn just enough CANbus to understand byte-level data
+3.	Trace one problematic CAN message through the existing program
+4.	Identify weaknesses in the unpacking logic
+5.	Write a replacement script block with safer, more explicit decoding
+6.	Validate the new block against the existing one
+________________________________________
+3. Intern Learning & Notes (Lightweight)
+Notes are treated as a learning aid, not formal documentation.
+•	Single running document (digital or notebook)
+•	Focus on:
+o	What a CAN message is (ID + bytes)
+o	What each byte in the target message represents
+o	What the current code does, line by line
+o	Observed failure behavior
+•	No formal formatting or deliverables required for notes
+Purpose: ensure the intern understands the data flow before modifying logic.
+________________________________________
+4. Program Analysis
+Intern traces:
+CAN receive → raw bytes → unpacking logic → final value
+Key questions:
+•	Are bytes copied or read directly from the CAN buffer?
+•	Are multi-byte values assembled explicitly?
+•	Is unpacking happening in a task that could read changing data?
+This step confirms whether the unpacking method is a plausible root cause.
+________________________________________
+5. Root Cause Confirmation
+Using observation and simple logging:
+•	Compare raw CAN bytes to decoded values
+• Use AI to directly analyze the code. 
+•	Misreads are consistent with unpacking timing, byte order, or type handling—not bus errors.
+________________________________________
+6. Corrective Action
+Intern writes a new Opto22 script block that unpacks the CAN message.
+________________________________________
+7. Validation
+•	Run origina new script blocks in comparison
+•	Compare logs under normal operation, look for misformed messages
+•	Confirm the new block eliminates or significantly reduces misreads
+________________________________________
+8. Deliverables
+•	Replacement script block (test-only)
+•	Short summary of findings and reasoning
+•	Informal notes retained for knowledge transfer
+________________________________________
+9. Expected Value
+•	Confirms or eliminates unpacking logic as root cause
+•	Produces safer, clearer decode logic
+•	Brings intern up to speed on CAN and PLC data handling with minimal overhead
+
