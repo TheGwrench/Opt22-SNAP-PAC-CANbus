@@ -20,7 +20,6 @@ Notes are treated as a learning aid, not formal documentation.
 •	Single running document (digital or notebook)
 •	Focus on:
 o	What a CAN message is (ID + bytes)
-o	What each byte in the target message represents
 o	What the current code does, line by line
 o	Observed failure behavior
 •	No formal formatting or deliverables required for notes
@@ -31,7 +30,6 @@ Intern traces:
 CAN receive → raw bytes → unpacking logic → final value
 Key questions:
 •	Are bytes copied or read directly from the CAN buffer?
-•	Are multi-byte values assembled explicitly?
 •	Is unpacking happening in a task that could read changing data?
 This step confirms whether the unpacking method is a plausible root cause.
 ________________________________________
@@ -39,13 +37,13 @@ ________________________________________
 Using observation and simple logging:
 •	Compare raw CAN bytes to decoded values
 • Use AI to directly analyze the code. 
-•	Misreads are consistent with unpacking timing, byte order, or type handling—not bus errors.
+•	Misreads are consistent with unpacking timing, byte order, or type handling?
 ________________________________________
 6. Corrective Action
-Intern writes a new Opto22 script block that unpacks the CAN message.
+Intern uses IA to write a new Opto22 script block that unpacks the CAN message.
 ________________________________________
 7. Validation
-•	Run origina new script blocks in comparison
+•	Run original and new script blocks in comparison
 •	Compare logs under normal operation, look for misformed messages
 •	Confirm the new block eliminates or significantly reduces misreads
 ________________________________________
